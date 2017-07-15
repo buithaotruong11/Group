@@ -1,0 +1,59 @@
+ private void btnTimkiemActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+           if(this.txtTimkiem.getText().length() == 0) {
+            String sql1 = "SELECT * from SACH ";
+           UPDATE.LoadData(sql1, tbSach);
+        }
+        else {
+            String sql1 = "SELECT * from SACH WHERE Ma_Sach like N'%"+this.txtTimkiem.getText()+"%' "
+            + "or Ten_Sach like N'%"+this.txtTimkiem.getText()+"%'"
+            + "or Ten_Tac_gia like N'%"+this.txtTimkiem.getText()+"%'"
+            + "or Nha_Xb like N'%"+this.txtTimkiem.getText()+"%'";
+            UPDATE.LoadData(sql1, tbSach);
+        }
+    }                                          
+......................................................................................................................................................
+    private void btAddSachActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+       try{    if (this.txtMaSach.getText().length()==0) JOptionPane.showMessageDialog(null, "Mã sách không th? b? tr?ng", "thông báo", 2);
+        else if(this.txtMaSach.getText().length()>10) JOptionPane.showMessageDialog(null, "Mã sách không du?c l?n hon 10 ký t?", "thông báo", 2);
+        else {
+            Sach s = new Sach(this.txtMaSach.getText(), this.txtTenSach.getText(), this.txtTacGia.getText(),this.txtNXB.getText(),
+             Integer.parseInt(this.txtGiatien.getText()),Integer.parseInt(this.txtSoLuong.getText()));
+            SachDAL.InsertSach(s);
+            UPDATE.LoadData(sqlSach, tbSach);
+        
+        }
+  
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Có l?i x?y ra", "Thông báo", 2);
+            
+..............................................................................................................
+   private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+                if (this.txtMaSach.getText().length()==0) JOptionPane.showMessageDialog(null, "Mã sách không th? b? tr?ng", "thông báo", 2);
+        else if(this.txtMaSach.getText().length()>10) JOptionPane.showMessageDialog(null, "Mã sách không du?c l?n hon 10 ký t?", "thông báo", 2);
+        else {
+            if(sachdata.DeleteSach(this.txtMaSach.getText())) {
+                JOptionPane.showMessageDialog(null, "B?n dã xóa thành công", "Thông báo", 1);
+            }
+            else JOptionPane.showMessageDialog(null, "Có l?i x?y ra", "Thông báo", 2);
+           
+        }
+    }                                      
+............................................................................................................
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+        if (this.txtMaSach.getText().length()==0) JOptionPane.showMessageDialog(null, "Mã sách không th? b? tr?ng", "thông báo", 2);
+        else if(this.txtMaSach.getText().length()>10) JOptionPane.showMessageDialog(null, "Mã sách không du?c l?n hon 10 ký t?", "thông báo", 2);
+        else {
+            Sach s = new Sach(this.txtMaSach.getText(), this.txtTenSach.getText(), this.txtTacGia.getText(),this.txtNXB.getText(),
+             Integer.parseInt(this.txtGiatien.getText()),Integer.parseInt(this.txtSoLuong.getText()));
+            if(sachdata.UpdateSach(s)) {
+                JOptionPane.showMessageDialog(null, "B?n dã s?a thành công", "Thông báo", 1);
+            }
+            else JOptionPane.showMessageDialog(null, "Có l?i x?y ra", "Thông báo", 2);
+           
+        }
+    }                                 
